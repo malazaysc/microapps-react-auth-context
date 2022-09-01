@@ -1,5 +1,5 @@
 {
-  "name": "@southerncode/microapps-react-authentication-context",
+  "name": "sc_microapps-react-authentication-context",
   "version": "1.0.0",
   "description": "Southern Code basic auth context module",
   "main": "dist/index.js",
