@@ -4,6 +4,7 @@ import {
     useContext,
     useState,
   } from "react";
+import { loginApi } from './api/login.api';
   
   const Cookies = require("js-cookie");
   
@@ -13,17 +14,27 @@ import {
   export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(Cookies.get("token"));
   
-    const login = async (username, password) => {
+    /**
+     * This function is used to login the user.
+     * If the login is successful, the token is stored in the cookies.
+     * @param {*} body is an object containing the body that the api endpoint expects.
+     * @example login({email: "username", password: "password"})
+     */
+    const login = async (body) => {
       console.log(
-        "Should hit the server with username and password",
-        username,
-        password
+        "Should hit the server with body",
+        body
       );
-  
-      const fakeToken = "fakeToken";
-  
-      Cookies.set("token", fakeToken);
-      setToken(fakeToken);
+      
+      const { status, data, error } = await loginApi(body);
+      if (error) {
+        console.log("Error logging in");
+        return
+      }
+      if (status === 200) {
+        setToken(data.access);
+        Cookies.set("token", data.access);
+      }
     };
   
     const logout = () => {
