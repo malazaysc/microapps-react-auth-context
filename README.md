@@ -64,7 +64,8 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(username, password);
+	//Be sure you are passing the username and password inside an object
+    login({username, password});
   };
 
   return (
@@ -105,7 +106,7 @@ export  default  function  MainPage() {
 	return (
 		<div>
 			<h1>Welcome to the Home Page</h1>
-			{token ? (<p>You are logged in</p>) : (You are logged out)}
+			{token ? <p>You are logged in</p> : <p>You are logged out</p>}
 		</div>
 	)
 }
@@ -127,7 +128,7 @@ export default function LogoutPage() {
   return (
     <div>
       <h1>Why you no like us?? :(</h1>
-      <button onClick={() => logout()}>Logout</button>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
