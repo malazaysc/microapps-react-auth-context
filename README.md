@@ -2,6 +2,9 @@
 
 This module handles an **Authentication Context** to be used in any micro app that uses **React**
 
+# Status:
+[![Tests](https://github.com/malazaysc/microapps-react-auth-context/actions/workflows/test_build_publish.yml/badge.svg)](https://github.com/malazaysc/microapps-react-auth-context/actions/workflows/test_build_publish.yml)
+
 # Installation
 ```sh
 yarn add @southerncode/microapps-react-authentication-context
