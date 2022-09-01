@@ -21,15 +21,14 @@ import { loginApi } from './api/login.api';
      * @example login({email: "username", password: "password"})
      */
     const login = async (body) => {
-      console.log(
-        "Should hit the server with body",
-        body
-      );
-      
       const { status, data, error } = await loginApi(body);
       if (error) {
         console.log("Error logging in");
-        return
+        return {
+          error,
+          status,
+          data
+        }
       }
       if (status === 200) {
         setToken(data.access);
@@ -37,8 +36,11 @@ import { loginApi } from './api/login.api';
       }
     };
   
+    /**
+     * This function is used to logout the user.
+     * The token is removed from the cookies.
+     */
     const logout = () => {
-      console.log("Will logout");
       Cookies.remove("token");
       setToken(undefined);
     };
