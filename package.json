@@ -1,0 +1,40 @@
+{
+  "name": "@southerncode/microapps-react-authentication-context",
+  "version": "1.0.0",
+  "description": "Southern Code basic auth context module",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "author": "malazay-sc",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build-lib": "rollup -c",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@testing-library/react": "^13.3.0",
+    "babel-jest": "^29.0.1",
+    "jest": "^29.0.1",
+    "jest-environment-jsdom": "^29.0.1",
+    "js-cookie": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "rollup": "^2.79.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "peerDependencies": {
+    "js-cookie": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
