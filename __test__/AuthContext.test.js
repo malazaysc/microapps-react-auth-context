@@ -1,9 +1,27 @@
-import React from "react";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import React, { useEffect } from "react";
+import { screen, fireEvent, render, waitForElementToBeRemoved } from "@testing-library/react";
 import { AuthProvider, useAuthContext } from "../src/AuthContext";
+import userEvent from '@testing-library/user-event';
+
+global.fetch = jest.fn().mockImplementation(() => 
+  Promise.resolve({
+    status: 200,
+    success: true, error: null,
+    json: () => Promise.resolve({  access: "token" }),
+  })
+)
 
 const Component = () => {
   const { token, login, logout } = useAuthContext();
+
+  useEffect(() => {
+    if (token) {
+      console.log('Token has been setup', token);
+      console.log('Should display the logout button');
+    }
+    
+  }, [token])
+
   return (
     <div>
       {token ? (
@@ -25,11 +43,21 @@ it("Token does not exist by default", () => {
 });
 
 it("Token is present after login", () => {
-  const { getByText, getByTestId } = render(
+  render(
     <AuthProvider>
       <Component />
     </AuthProvider>
   );
-  fireEvent.click(getByText("Login"));
-  expect(getByText("Logout")).toBeTruthy();
+
+  
+  // fireEvent.click(getByText("Login"));
+  const loginBtn = screen.getByRole('button', {
+    name: /login/i
+  })
+
+  userEvent.click(loginBtn);
+
+  const logoutBtn = screen.findByText("Logout")
+  expect(logoutBtn).toBeTruthy()
+  screen.logTestingPlaygroundURL();
 });

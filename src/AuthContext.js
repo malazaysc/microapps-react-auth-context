@@ -21,9 +21,10 @@ import { loginApi } from './api/login.api';
      * @example login({email: "username", password: "password"})
      */
     const login = async (body) => {
-      const { status, data, error } = await loginApi(body);
+      const response = await loginApi(body);
+      const { status, data, error } = response;
       if (error) {
-        console.log("Error logging in");
+        console.log("Error logging in", error);
         return {
           error,
           status,
@@ -33,6 +34,12 @@ import { loginApi } from './api/login.api';
       if (status === 200) {
         setToken(data.access);
         Cookies.set("token", data.access);
+      }
+
+      return {
+        error,
+        status,
+        data
       }
     };
   
